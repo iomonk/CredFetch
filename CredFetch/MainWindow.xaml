@@ -1,44 +1,21 @@
-﻿<Window x:Class="CredFetch.MainWindow"
+﻿<Window Name="WindowMain"
+        x:Class="CredFetch.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="CredFetch"
-        Height="700" Width="210"
+        Width="210"
+        Height="180"
         ResizeMode="CanMinimize">
-    <Grid>
-        <Button x:Name="Button0" Click="BtnOne" Content="Not Set" HorizontalAlignment="Center" Margin="0,15,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button1" Click="BtnTwo" Content="Not Set" HorizontalAlignment="Center" Margin="0,55,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button2" Click="BtnThree" Content="Not Set" HorizontalAlignment="Center" Margin="0,95,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button3" Click="BtnFour" Content="Not Set" HorizontalAlignment="Center" Margin="0,135,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button4" Click="BtnFive" Content="Not Set" HorizontalAlignment="Center" Margin="0,175,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button5" Click="BtnSix" Content="Not Set" HorizontalAlignment="Center" Margin="0,215,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button6" Click="BtnSeven" Content="Not Set" HorizontalAlignment="Center" Margin="0,255,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button7" Click="BtnEight" Content="Not Set" HorizontalAlignment="Center" Margin="0,295,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button8" Click="BtnNine" Content="Not Set" HorizontalAlignment="Center" Margin="0,335,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button9" Click="BtnTen" Content="Not Set" HorizontalAlignment="Center" Margin="0,375,0,0"
-                VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button10" Click="BtnEleven" Content="Not Set" HorizontalAlignment="Center"
-                Margin="0,415,0,0" VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button11" Click="BtnTwelve" Content="Not Set" HorizontalAlignment="Center"
-                Margin="0,455,0,0" VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <Button x:Name="Button12" Click="BtnThirteen" Content="Not Set" HorizontalAlignment="Center"
-                Margin="0,495,0,0" VerticalAlignment="Top" Width="150" Height="35" FontSize="17" IsEnabled="False" />
-        <PasswordBox x:Name="KeyBox" HorizontalAlignment="Center" Margin="0,535,0,0" VerticalAlignment="Top"
+    <Grid Name="GridLayout">
+        <PasswordBox Name="KeyBox" Password="" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top"
                      Height="25" Width="150" FontSize="17" />
-        <PasswordBox x:Name="IvBox" HorizontalAlignment="Center" Margin="0,566,0,0" VerticalAlignment="Top" Height="25"
+        <PasswordBox Name="IvBox" Password="" HorizontalAlignment="Center" Margin="0,55,0,0" VerticalAlignment="Top"
+                     Height="25"
                      Width="150" FontSize="17" />
-        <Button x:Name="ButtonOk" Click="DecryptConfigFileBtn" Content="OK" HorizontalAlignment="Center"
-                Margin="0,598,0,0" VerticalAlignment="Top" Width="150" Height="25" FontSize="15" />
+        <Button Name="ButtonOk" Click="DecryptConfigFileBtn" Content="OK" HorizontalAlignment="Center"
+                Margin="0,95,0,0" VerticalAlignment="Top" Width="150" Height="25" FontSize="15" />
     </Grid>
 </Window>

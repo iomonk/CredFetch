@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using CredFetch.Models;
 
 namespace CredFetch;
@@ -23,7 +25,12 @@ public partial class MainWindow
         var fileContent = ReadFile();
         var decryptedFile = DecryptFile(fileContent);
         GetAllKeysAndValues(decryptedFile);
-        EnableAndSetButtons();
+
+        var buttonAmount = CountButtons();
+        if (buttonAmount == 0) return;
+
+        var buttons = CreateButtons(buttonAmount);
+        ConfigureWindowPlaceButtons(buttons);
     }
 
     private static void CheckFileExists()
@@ -55,106 +62,82 @@ public partial class MainWindow
         }
     }
 
-    private void EnableAndSetButtons()
+    private int CountButtons()
     {
-        Button0.IsEnabled = true;
-        Button0.Content = _eachKey[0];
-        Button1.IsEnabled = true;
-        Button1.Content = _eachKey[1];
-        Button2.IsEnabled = true;
-        Button2.Content = _eachKey[2];
-        Button3.IsEnabled = true;
-        Button3.Content = _eachKey[3];
-        Button4.IsEnabled = true;
-        Button4.Content = _eachKey[4];
-        Button5.IsEnabled = true;
-        Button5.Content = _eachKey[5];
-        Button6.IsEnabled = true;
-        Button6.Content = _eachKey[6];
-        Button7.IsEnabled = true;
-        Button7.Content = _eachKey[7];
-        Button8.IsEnabled = true;
-        Button8.Content = _eachKey[8];
-        Button9.IsEnabled = true;
-        Button9.Content = _eachKey[9];
-        Button10.IsEnabled = true;
-        Button10.Content = _eachKey[10];
-        Button11.IsEnabled = true;
-        Button11.Content = _eachKey[11];
-        Button12.IsEnabled = true;
-        Button12.Content = _eachKey[12];
+        var keyAmount = _eachKey.Count;
+        var valueAmount = _eachValue.Count;
 
-        KeyBox.IsEnabled = false;
+        if (keyAmount < 1 || valueAmount < 1 || keyAmount != valueAmount)
+        {
+            MessageBox.Show(Constants.ConfigMismatch);
+            return 0;
+        }
+
+        if (keyAmount <= 15 && valueAmount <= 15) return keyAmount;
+        MessageBox.Show(Constants.PasswordLimit);
+        return 0;
+    }
+
+    private List<Button> CreateButtons(int elements)
+    {
+        var buttonList = new List<Button>();
+
+        for (var i = 0; i < elements; i++)
+        {
+            var button = new Button
+            {
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Height = 35,
+                Width = 150,
+                FontSize = 14,
+                IsEnabled = true,
+                Content = _eachKey[i],
+                Name = $"{_eachKey[i]}{i}"
+            };
+            button.Click += BtnClicked;
+            buttonList.Add(button);
+        }
+
+        return buttonList;
+    }
+
+    private void ConfigureWindowPlaceButtons(List<Button> buttons)
+    {
+        var topMargin = 15;
+        foreach (var btn in buttons)
+        {
+            btn.Margin = new Thickness(0, topMargin, 0, 15);
+            WindowMain.GridLayout.Children.Add(btn);
+            topMargin += 40;
+        }
+
         KeyBox.Password = "";
+        KeyBox.Visibility = Visibility.Hidden;
 
-        IvBox.IsEnabled = false;
         IvBox.Password = "";
+        IvBox.Visibility = Visibility.Hidden;
 
         ButtonOk.IsEnabled = false;
+        ButtonOk.Visibility = Visibility.Hidden;
+
+        WindowMain.SizeToContent = SizeToContent.Height;
+        WindowMain.Width = 210;
+        WindowMain.ResizeMode = ResizeMode.CanMinimize;
     }
 
-    private void BtnOne(object sender, RoutedEventArgs e)
+    private void BtnClicked(object sender, RoutedEventArgs e)
     {
-        Clipboard.SetText(_eachValue[0]);
-    }
+        var name = Convert.ToString(e.Source.GetType().GetProperty("Name")?.GetValue(e.Source, null));
 
-    private void BtnTwo(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[1]);
-    }
+        if (name == null)
+        {
+            MessageBox.Show(Constants.ConfigMismatch);
+            return;
+        }
 
-    private void BtnThree(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[2]);
-    }
-
-    private void BtnFour(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[3]);
-    }
-
-    private void BtnFive(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[4]);
-    }
-
-    private void BtnSix(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[5]);
-    }
-
-    private void BtnSeven(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[6]);
-    }
-
-    private void BtnEight(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[7]);
-    }
-
-    private void BtnNine(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[8]);
-    }
-
-    private void BtnTen(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[9]);
-    }
-
-    private void BtnEleven(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[10]);
-    }
-
-    private void BtnTwelve(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[11]);
-    }
-
-    private void BtnThirteen(object sender, RoutedEventArgs e)
-    {
-        Clipboard.SetText(_eachValue[12]);
+        var number = Regex.Match(name, @"\d+").Value;
+        var num = int.Parse(number);
+        Clipboard.SetText(_eachValue[num]);
     }
 }

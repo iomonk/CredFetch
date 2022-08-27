@@ -1,2 +1,2 @@
 # CredFetch
-A simple, dynamic and encrypted password safe that lets you store up to 13 passwords
+A simple password safe. Dynamically displays up to 15 customized buttons that, when clicked, will copy selected password to the clipboard. Paste the password wherever and clear your clipboard. The program accepts an encrypted json configuration file.

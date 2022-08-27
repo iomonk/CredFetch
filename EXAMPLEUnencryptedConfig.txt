@@ -1,0 +1,17 @@
+{
+    "FirstPropertyName": "FirstPropertyPass",
+    "SecondPropertyName": "SecondPropertyPass",
+    "ThirdPropertyName": "ThirdPropertyPass",
+    "FourthPropertyName": "FourthPropertyPass",
+    "FifthPropertyName": "FifthPropertyPass",
+    "SixthPropertyName": "SixthPropertyPass",
+    "SeventhPropertyName": "SeventhPropertyPass",
+    "EighthPropertyName": "EighthPropertyPass",
+    "NinthPropertyName": "NinthPropertyPass",
+    "TenthPropertyName": "TenthPropertyPass",
+    "EleventhPropertyName": "EleventhPropertyPass",
+    "TwelfthPropertyName": "TwelfthPropertyPass",
+    "ThirteenthPropertyName": "ThirteenthPropertyPass",
+    "FourteenthPropertyName": "FourteenthPropertyPass",
+    "FifteenthPropertyName": "FifteenthPropertyPass"
+}
